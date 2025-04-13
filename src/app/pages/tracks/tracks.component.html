@@ -1,0 +1,15 @@
+<h1>Tracks</h1>
+<!-- TODO: this is disgusting. fix it or jump into an active volcano -->
+@for (item of tracks; track item.name) {
+    <mat-card appearance="outlined">
+        <mat-card-header>{{ item.name }}</mat-card-header>
+        <mat-card-content>
+            by {{ item.author.name }}
+            <mat-card-actions align="end">
+                <button mat-fab>
+                    <mat-icon>headphones</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+}

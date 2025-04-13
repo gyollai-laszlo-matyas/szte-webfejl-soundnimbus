@@ -1,0 +1,29 @@
+@keyframes float {
+    from {
+        transform:translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform:none;
+        opacity: 100;
+    }
+}
+
+h1 {
+    margin: 50px;
+    font-size: 48px;
+}
+
+button{
+    margin: 20px;
+    padding: 12px;
+}
+
+* {
+    text-align: center;
+    font-size: 24px;
+    line-height: 120%;
+    animation-name: float;
+    animation-timing-function: ease-out;
+    animation-duration: 1s;
+}
