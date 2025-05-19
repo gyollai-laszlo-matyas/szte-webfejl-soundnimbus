@@ -2,14 +2,26 @@
 <!-- TODO: this is disgusting. fix it or jump into an active volcano -->
 @for (item of tracks; track item.name) {
     <mat-card appearance="outlined">
-        <mat-card-header>{{ item.name }}</mat-card-header>
-        <mat-card-content>
-            by {{ item.author.name }}
-            <mat-card-actions align="end">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>{{ item.name }}</mat-card-title>
+                <!-- <mat-card-subtitle>by {{ item.authorId.name }}</mat-card-subtitle> -->
+            </mat-card-title-group>
+            <mat-card-actions>
                 <button mat-fab>
                     <mat-icon>headphones</mat-icon>
                 </button>
             </mat-card-actions>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-chip-set aria-label="Song tags">
+                @for (tag of item.tags.split(","); track tag){
+                    <mat-chip>{{ tag }}</mat-chip>
+                }
+            </mat-chip-set>
         </mat-card-content>
+        <mat-card-footer>
+            uploaded {{item.uploadDate | dateFormatter}}
+        </mat-card-footer>
     </mat-card>
 }

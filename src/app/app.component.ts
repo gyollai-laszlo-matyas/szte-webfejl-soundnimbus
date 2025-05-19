@@ -7,7 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
-
+import { Subscription } from 'rxjs';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,27 @@ import { NgClass } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'nimbus';
+  title = 'soundnimbus';
 
-  /*
-  changePage(selectedPage: string) {
-    this.page = selectedPage;
-  }*/
+  isLoggedIn = false;
+  private authSubscription?: Subscription;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authSubscription = this.authService.currentUser.subscribe(user => {
+      this.isLoggedIn = !!user;
+      localStorage.setItem('isLoggedIn', this.isLoggedIn ? 'true' : 'false');
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription?.unsubscribe();
+  }
+
+  logout(): void {
+    this.authService.signOut();
+  }
 
   onToggleSidenav(sidenav: MatSidenav){
     sidenav.toggle();

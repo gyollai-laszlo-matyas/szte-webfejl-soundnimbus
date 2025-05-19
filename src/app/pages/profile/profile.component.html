@@ -1,0 +1,70 @@
+<div class="profile-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>User Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (isLoading) {
+        <div class="loading-container">
+          <p>Loading profile data...</p>
+        </div>
+      } @else if (user) {
+        <div class="profile-info">
+          <div class="avatar-container">
+            <div>
+              {{ user.name }}
+            </div>
+          </div>
+          <div class="user-details">
+            <div class="user-email">
+              <mat-icon>email</mat-icon>
+              <span>{{ user.email }}</span> <br />
+              <mat-icon>person</mat-icon>
+              <span>{{ user.bio }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="stats-section">
+          <h2>Task Statistics</h2>
+          <div class="stats-cards">
+            <mat-card class="stat-card">
+              <mat-card-header>
+                <mat-icon mat-card-avatar>assignment</mat-icon>
+                <mat-card-title>{{ stats.tracks }}</mat-card-title>
+                <mat-card-subtitle>Tracks</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+            <mat-card class="stat-card">
+              <mat-card-header>
+                <mat-icon mat-card-avatar>done_all</mat-icon>
+                <mat-card-title>{{ stats.comments }}</mat-card-title>
+                <mat-card-subtitle>Comments</mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+          </div>
+        </div>
+      } @else {
+        <div class="empty-state">
+          <mat-icon>person_off</mat-icon>
+          <p>No user profile found. Please log in.</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+  
+    <div class="signup-container">
+        <form [formGroup]="updateForm" (ngSubmit)="updateProfile()" class="signup-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="newName">
+          </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Bio</mat-label>
+            <input matInput formControlName="newBio">
+          </mat-form-field>
+  
+        <button mat-flat-button color="primary" type="submit">Update Profile</button>
+      </form>
+    </div>
+</div>
